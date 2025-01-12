@@ -12,7 +12,7 @@ function emoteUI:CreateUI()
     end
     local emoteItems = {}
     local current_playing_id = "10714389988"
-    local ProBaconAnimation, ProBaconDanceTrack, current_playing_looped
+    local ProBaconAnimation, ProBaconDanceTrack, current_playing_looped, vertual_character, preview_on, previewanimation, previewdanceTrack, previewstepped
 
     local EmoteUI = Instance.new("ScreenGui")
     local ui_Base = Instance.new("Frame")
@@ -369,6 +369,62 @@ function emoteUI:CreateUI()
             current_playing_looped = emoteLoop
             renewEmote = true
         end)
+
+        local previewEmote = function(character, emoteId)
+            previewanimation = Instance.new("Animation", character)
+            previewanimation.AnimationId = "rbxassetid://"..emoteId
+            previewdanceTrack = character:FindFirstChildWhichIsA("Humanoid"):LoadAnimation(animation)
+            previewdanceTrack.Looped = true
+            previewdanceTrack:Play()
+        end
+        previewButton_Button.MouseButton1Click:Connect(function()
+            if preview_on then
+                if vertual_character then
+                    if previewstepped then
+                        previewstepped:Disconnect()
+                        previewstepped = nil
+                    end
+                    if previewdanceTrack then
+                        previewdanceTrack:Stop()
+                        previewdanceTrack = nil
+                    end
+                    if previewanimation then
+                        previewanimation:Destroy()
+                        previewanimation = nil
+                    end
+                    vertual_character:Destroy()
+                    vertual_character = nil
+                end
+                preview_on = false
+            else
+                if vertual_character then
+                    previewEmote(vertual_character, emoteId)
+                else
+                    if game.Players.LocalPlayer.Character then
+                        if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                            vertual_character = game.Players.LocalPlayer.Character:Clone()
+                            vertual_character.Parent = workspace
+                            for _, v in pairs(vertual_character:GetDescendants()) do
+                                if v:IsA("BasePart") then
+                                    v.CanCollide = false
+                                    v.Transparency = 0.5
+                                end
+                            end
+                            previewEmote(vertual_character, emoteId)
+                            previewstepped = game:GetService("RuntimeScriptService").Stepped:Connect(function()
+                                if game.Players.LocalPlayer.Character then
+                                    if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                                        vertual_character:PivotTo(CFrame.lookAt(vertual_character.PrimaryPart.Position, game.Players.LocalPlayer.Character.HumanoidRootPart.Position))
+                                    end
+                                end
+                            end)
+                        end
+                    end
+                end
+                preview_on = true
+            end
+        end)
+
 
     end
     return emoteItems
