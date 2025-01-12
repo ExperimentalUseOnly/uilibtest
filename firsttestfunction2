@@ -13,6 +13,9 @@ function emoteUI:CreateUI()
     local ui_Base = Instance.new("Frame")
     local UICorner = Instance.new("UICorner")
     local UIGradient = Instance.new("UIGradient")
+    local itemHolder_Frame = Instance.new("Frame")
+    local UICorner_2 = Instance.new("UICorner")
+    local itemHolder = Instance.new("ScrollingFrame")
     local currentPlaying_Frame = Instance.new("Frame")
     local UICorner_5 = Instance.new("UICorner")
     local currentPlaying_Name = Instance.new("TextLabel")
@@ -48,6 +51,31 @@ function emoteUI:CreateUI()
 
     UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 170, 255))}
     UIGradient.Parent = ui_Base
+    
+    itemHolder_Frame.Name = "itemHolder_Frame"
+    itemHolder_Frame.Parent = ui_Base
+    itemHolder_Frame.AnchorPoint = Vector2.new(0.5, 1)
+    itemHolder_Frame.BackgroundColor3 = Color3.fromRGB(255, 200, 200)
+    itemHolder_Frame.BackgroundTransparency = 0.750
+    itemHolder_Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    itemHolder_Frame.BorderSizePixel = 0
+    itemHolder_Frame.Position = UDim2.new(0.5, 0, 1, -80)
+    itemHolder_Frame.Size = UDim2.new(0, 249, 0, 330)
+
+    UICorner_2.CornerRadius = UDim.new(0, 30)
+    UICorner_2.Parent = itemHolder_Frame
+
+    itemHolder.Name = "itemHolder"
+    itemHolder.Parent = itemHolder_Frame
+    itemHolder.Active = true
+    itemHolder.AnchorPoint = Vector2.new(0, 0.5)
+    itemHolder.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    itemHolder.BackgroundTransparency = 1.000
+    itemHolder.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    itemHolder.BorderSizePixel = 0
+    itemHolder.Position = UDim2.new(0, 10, 0.5, 0)
+    itemHolder.Size = UDim2.new(0, 229, 0, 310)
+    itemHolder.ScrollBarThickness = 0
 
     currentPlaying_Frame.Name = "currentPlaying_Frame"
     currentPlaying_Frame.Parent = ui_Base
@@ -219,9 +247,6 @@ function emoteUI:CreateUI()
         if emoteLoop == nil then
             emoteLoop = true
         end
-        local itemHolder_Frame = Instance.new("Frame")
-        local UICorner_2 = Instance.new("UICorner")
-        local itemHolder = Instance.new("ScrollingFrame")
         local emoteOption_Button = Instance.new("TextButton")
         local UICorner_3 = Instance.new("UICorner")
         local emoteName_Label = Instance.new("TextLabel")
@@ -229,32 +254,6 @@ function emoteUI:CreateUI()
         local previewButton_Button = Instance.new("ImageButton")
         local UICorner_4 = Instance.new("UICorner")
         local UIListLayout = Instance.new("UIListLayout")
-
-
-        itemHolder_Frame.Name = "itemHolder_Frame"
-        itemHolder_Frame.Parent = ui_Base
-        itemHolder_Frame.AnchorPoint = Vector2.new(0.5, 1)
-        itemHolder_Frame.BackgroundColor3 = Color3.fromRGB(255, 200, 200)
-        itemHolder_Frame.BackgroundTransparency = 0.750
-        itemHolder_Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-        itemHolder_Frame.BorderSizePixel = 0
-        itemHolder_Frame.Position = UDim2.new(0.5, 0, 1, -80)
-        itemHolder_Frame.Size = UDim2.new(0, 249, 0, 330)
-
-        UICorner_2.CornerRadius = UDim.new(0, 30)
-        UICorner_2.Parent = itemHolder_Frame
-
-        itemHolder.Name = "itemHolder"
-        itemHolder.Parent = itemHolder_Frame
-        itemHolder.Active = true
-        itemHolder.AnchorPoint = Vector2.new(0, 0.5)
-        itemHolder.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        itemHolder.BackgroundTransparency = 1.000
-        itemHolder.BorderColor3 = Color3.fromRGB(0, 0, 0)
-        itemHolder.BorderSizePixel = 0
-        itemHolder.Position = UDim2.new(0, 10, 0.5, 0)
-        itemHolder.Size = UDim2.new(0, 229, 0, 310)
-        itemHolder.ScrollBarThickness = 0
 
         emoteOption_Button.Name = "emoteOption_Button"
         emoteOption_Button.Parent = itemHolder
