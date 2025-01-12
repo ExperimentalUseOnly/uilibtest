@@ -5,6 +5,11 @@ local round = function(num)
 end
 
 function emoteUI:CreateUI()
+    if game.CoreGui:FindFirstChild("EmoteUI") then
+        repeat
+            game.CoreGui:FindFirstChild("EmoteUI"):Destroy()
+        until not game.CoreGui:FindFirstChild("EmoteUI")
+    end
     local emoteItems = {}
     local current_playing_id = "10714389988"
     local ProBaconDanceTrack, current_playing_looped, current_emote_playing
@@ -317,7 +322,7 @@ function emoteUI:CreateUI()
 
         emoteOption_Button.MouseButton1Click:Connect(function()
             currentPlaying_Name.Text = emoteName
-            current_playing_id = emoteId
+            current_playing_id = "rbxassetid://"..emoteId
             current_playing_looped = emoteLoop
         end)
 
