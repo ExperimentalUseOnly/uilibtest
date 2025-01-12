@@ -206,16 +206,16 @@ function emoteUI:CreateUI()
     UICorner_9.Parent = dragToMove_Bar
 
     local dragging = false
-    local dragInput, mousePos, framePos
+    local dragInput, mousePos, framePos, hitboxPos
     dragToMove_Hitbox.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
             dragging = true
             mousePos = input.Position
             framePos = ui_Base.Position
+            hitboxPos = dragToMove_Hitbox.Position
             
             input.Changed:Connect(function()
                 if input.UserInputState == Enum.UserInputState.End then
-                    print(input.UserInputType)
                     dragging = false
                 end
             end)
@@ -232,7 +232,7 @@ function emoteUI:CreateUI()
         if input == dragInput and dragging then
             local delta = input.Position - mousePos
             ui_Base.Position  = UDim2.new(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)
-            dragToMove_Hitbox.Position = UDim2.new(ui_Base.Position.X.Scale, ui_Base.Position.X.Offset, ui_Base.Position.Y.Scale, ui_Base.Position.Y.Offset+210)
+            dragToMove_Hitbox.Position = UDim2.new(hitboxPos.X.Scale, hitboxPos.X.Offset + delta.X, hitboxPos.Y.Scale, hitboxPos.Y.Offset + delta.Y)
         end
     end)
 
