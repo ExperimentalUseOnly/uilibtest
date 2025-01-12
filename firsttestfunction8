@@ -236,8 +236,8 @@ function emoteUI:CreateUI()
         if ProBaconDanceTrack then
             ProBaconDanceTrack:Stop()
             ProBaconDanceTrack:Destroy()
+            ProBaconDanceTrack = nil
             ProBaconAnimation:Destroy()
-            
         else
             playEmote()
         end
