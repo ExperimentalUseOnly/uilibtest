@@ -12,7 +12,7 @@ function emoteUI:CreateUI()
     end
     local emoteItems = {}
     local current_playing_id = "10714389988"
-    local ProBaconDanceTrack, current_playing_looped
+    local ProBaconAnimation, ProBaconDanceTrack, current_playing_looped
 
     local EmoteUI = Instance.new("ScreenGui")
     local ui_Base = Instance.new("Frame")
@@ -212,7 +212,7 @@ function emoteUI:CreateUI()
                     ProBaconDanceTrack:Stop()
                     ProBaconDanceTrack:Destroy()
                 end
-                local ProBaconAnimation = Instance.new("Animation", game.Players.LocalPlayer.Character)
+                ProBaconAnimation = Instance.new("Animation", game.Players.LocalPlayer.Character)
                 ProBaconAnimation.AnimationId = current_playing_id
                 ProBaconDanceTrack = game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid"):LoadAnimation(ProBaconAnimation)
                 ProBaconDanceTrack.Looped = current_playing_looped
@@ -233,11 +233,13 @@ function emoteUI:CreateUI()
         end
     end)
     ImageButton.MouseButton1Click:Connect(function()
-        if not ProBaconDanceTrack then
-            playEmote()
-        elseif ProBaconDanceTrack then
+        if ProBaconDanceTrack then
             ProBaconDanceTrack:Stop()
             ProBaconDanceTrack:Destroy()
+            ProBaconAnimation:Destroy()
+            
+        else
+            playEmote()
         end
     end)
     
