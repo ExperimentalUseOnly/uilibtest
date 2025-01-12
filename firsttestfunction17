@@ -214,7 +214,8 @@ function emoteUI:CreateUI()
             framePos = ui_Base.Position
             
             input.Changed:Connect(function()
-                if input.UserInputState == Enum.UserInputState.End and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+                if input.UserInputState == Enum.UserInputState.End then
+                    print(input.UserInputType)
                     dragging = false
                 end
             end)
