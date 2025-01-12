@@ -245,6 +245,7 @@ function emoteUI:CreateUI()
     
     game:GetService("RunService").Stepped:Connect(function(time, deltaTime)
         UIGradient.Rotation = UIGradient.Rotation + 0.5
+        itemHolder.CanvasSize = UDim2.new(0,0,0,UIListLayout.AbsoluteContentSize.Y+1)
         if ProBaconDanceTrack then
             emoteLength_Num.Text = round(ProBaconDanceTrack.TimePosition).."/"..round(ProBaconDanceTrack.Length)
             Frame.Size = UDim2.new(round(ProBaconDanceTrack.TimePosition/ProBaconDanceTrack.Length), 0, 1, 0)
