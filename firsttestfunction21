@@ -402,8 +402,15 @@ function emoteUI:CreateUI()
                 else
                     if game.Players.LocalPlayer.Character then
                         if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-                            vertual_character = game.Players.LocalPlayer.Character:Clone()
-                            vertual_character.Parent = workspace
+                            local previewCharacter = Instance.new("Model", workspace)
+                            previewCharacter.name = "previewCharacter"
+                            for _, v in pairs(game.players.LocalPlayer:GetDescendants()) do
+                                if v:IsA("BasePart") then
+                                    local part = v:Clone()
+                                    part.Parent = previewCharacter
+                                end
+                            end
+                            vertual_character = previewCharacter
                             for _, v in pairs(vertual_character:GetDescendants()) do
                                 if v:IsA("BasePart") then
                                     v.CanCollide = false
