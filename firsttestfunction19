@@ -35,7 +35,7 @@ function emoteUI:CreateUI()
     local UICorner_8 = Instance.new("UICorner")
     local UIGradient_3 = Instance.new("UIGradient")
     local ImageButton = Instance.new("ImageButton")
-    local dragToMove_Hitbox = Instance.new("Frame")
+    local dragToMove_Hitbox = Instance.new("TextButton")
     local dragToMove_Bar = Instance.new("Frame")
     local UICorner_9 = Instance.new("UICorner")
 
@@ -192,6 +192,8 @@ function emoteUI:CreateUI()
     dragToMove_Hitbox.BorderSizePixel = 0
     dragToMove_Hitbox.Position = UDim2.new(0.751999974, 0, 0.537, 210)
     dragToMove_Hitbox.Size = UDim2.new(0, 121, 0, 16)
+    dragToMove_Hitbox.Text = ""
+    dragToMove_Hitbox.AutoButtonColor = false
 
     dragToMove_Bar.Name = "dragToMove_Bar"
     dragToMove_Bar.Parent = dragToMove_Hitbox
