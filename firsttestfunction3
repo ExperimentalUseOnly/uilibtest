@@ -16,6 +16,7 @@ function emoteUI:CreateUI()
     local itemHolder_Frame = Instance.new("Frame")
     local UICorner_2 = Instance.new("UICorner")
     local itemHolder = Instance.new("ScrollingFrame")
+    local UIListLayout = Instance.new("UIListLayout")
     local currentPlaying_Frame = Instance.new("Frame")
     local UICorner_5 = Instance.new("UICorner")
     local currentPlaying_Name = Instance.new("TextLabel")
@@ -76,6 +77,10 @@ function emoteUI:CreateUI()
     itemHolder.Position = UDim2.new(0, 10, 0.5, 0)
     itemHolder.Size = UDim2.new(0, 229, 0, 310)
     itemHolder.ScrollBarThickness = 0
+
+    UIListLayout.Parent = itemHolder
+    UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+    UIListLayout.Padding = UDim.new(0, 5)
 
     currentPlaying_Frame.Name = "currentPlaying_Frame"
     currentPlaying_Frame.Parent = ui_Base
@@ -196,7 +201,7 @@ function emoteUI:CreateUI()
     UICorner_9.Parent = dragToMove_Bar
 
     local playEmote = function()
-        if not game.Players.LocalPlayer.Character then
+        if game.Players.LocalPlayer.Character then
             if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
                 if ProBaconDanceTrack then
                     ProBaconDanceTrack:Stop()
@@ -207,8 +212,10 @@ function emoteUI:CreateUI()
                 ProBaconDanceTrack = game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid"):LoadAnimation(ProBaconAnimation)
                 ProBaconDanceTrack.Looped = current_playing_looped
                 ProBaconDanceTrack:Play()
+                return true
             end
         end
+        return false
     end
     currentPlaying_Name.Changed:Connect(function(property)
         if property == "Text" then
@@ -217,8 +224,7 @@ function emoteUI:CreateUI()
     end)
     ImageButton.MouseButton1Click:Connect(function()
         if not current_emote_playing then
-            current_emote_playing = true
-            playEmote()
+            current_emote_playing = playEmote()
         else
             current_emote_playing = false
             if ProBaconDanceTrack then
@@ -229,6 +235,8 @@ function emoteUI:CreateUI()
     end)
     
     game:GetService("RunService").Stepped:Connect(function(time, deltaTime)
+        UIGradient.Rotation = UIGradient.Rotation + 0.5
+        UIGradient_2.Rotation = UIGradient.Rotation
         if ProBaconDanceTrack then
             emoteLength_Num.Text = round(ProBaconDanceTrack.TimePosition).."/"..round(ProBaconDanceTrack.Length)
             Frame.Size = UDim2.new(round(ProBaconDanceTrack.TimePosition/ProBaconDanceTrack.Length), 0, 1, 0)
@@ -253,7 +261,6 @@ function emoteUI:CreateUI()
         local previewButton_Base = Instance.new("Frame")
         local previewButton_Button = Instance.new("ImageButton")
         local UICorner_4 = Instance.new("UICorner")
-        local UIListLayout = Instance.new("UIListLayout")
 
         emoteOption_Button.Name = "emoteOption_Button"
         emoteOption_Button.Parent = itemHolder
@@ -307,9 +314,6 @@ function emoteUI:CreateUI()
 
         UICorner_4.CornerRadius = UDim.new(1, 0)
         UICorner_4.Parent = previewButton_Base
-
-        UIListLayout.Parent = itemHolder
-        UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
         emoteOption_Button.MouseButton1Click:Connect(function()
             currentPlaying_Name.Text = emoteName
