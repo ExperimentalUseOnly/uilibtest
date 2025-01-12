@@ -403,7 +403,7 @@ function emoteUI:CreateUI()
                     if game.Players.LocalPlayer.Character then
                         if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
                             local previewCharacter = Instance.new("Model", workspace)
-                            previewCharacter.name = "previewCharacter"
+                            previewCharacter.Name = "previewCharacter"
                             for _, v in pairs(game.players.LocalPlayer:GetDescendants()) do
                                 if v:IsA("BasePart") then
                                     local part = v:Clone()
