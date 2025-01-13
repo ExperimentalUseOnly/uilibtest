@@ -263,8 +263,12 @@ function emoteUI:CreateUI()
         return false
     end
     ImageButton.MouseButton1Click:Connect(function()
-        if ProBaconDanceTrack.IsPlaying then
-            ProBaconDanceTrack:Pause()
+        if ProBaconDanceTrack then
+            if ProBaconDanceTrack.Speed == 1 then
+                ProBaconDanceTrack:AdjustSpeed(0)
+            else
+                ProBaconDanceTrack:AdjustSpeed(1)
+            end
         else
             playEmote()
         end
