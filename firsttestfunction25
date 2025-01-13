@@ -262,22 +262,9 @@ function emoteUI:CreateUI()
         end
         return false
     end
-    local renewEmote = false
-    currentPlaying_Name.Changed:Connect(function(property)
-        if property == "Text" then
-            repeat
-                task.wait(0.05)
-            until renewEmote
-            playEmote()
-            renewEmote = false
-        end
-    end)
     ImageButton.MouseButton1Click:Connect(function()
-        if ProBaconDanceTrack then
-            ProBaconDanceTrack:Stop()
-            ProBaconDanceTrack:Destroy()
-            ProBaconDanceTrack = nil
-            ProBaconAnimation:Destroy()
+        if ProBaconDanceTrack.IsPlaying then
+            ProBaconDanceTrack:Pause()
         else
             playEmote()
         end
@@ -367,7 +354,7 @@ function emoteUI:CreateUI()
             currentPlaying_Name.Text = emoteName
             current_playing_id = "rbxassetid://"..emoteId
             current_playing_looped = emoteLoop
-            renewEmote = true
+            playEmote()
         end)
 
 
