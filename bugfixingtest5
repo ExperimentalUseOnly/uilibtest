@@ -84,7 +84,7 @@ function emoteUI:CreateUI()
     itemHolder.ScrollBarThickness = 0
 
     UIListLayout.Parent = itemHolder
-    UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+    UIListLayout.SortOrder = Enum.SortOrder.Name
     UIListLayout.Padding = UDim.new(0, 5)
 
     currentPlaying_Frame.Name = "currentPlaying_Frame"
@@ -170,7 +170,7 @@ function emoteUI:CreateUI()
     UICorner_8.CornerRadius = UDim.new(1, 0)
     UICorner_8.Parent = playButton
 
-    UIGradient_3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(190, 190, 190))}
+    UIGradient_3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
     UIGradient_3.Parent = playButton
 
     ImageButton.Parent = playButton
@@ -307,6 +307,7 @@ function emoteUI:CreateUI()
     
     game:GetService("RunService").Stepped:Connect(function(time, deltaTime)
         UIGradient.Rotation = UIGradient.Rotation + 0.5
+        UIGradient_3.Rotation = 40
         itemHolder.CanvasSize = UDim2.new(0,0,0,UIListLayout.AbsoluteContentSize.Y+1)
         if ProBaconDanceTrack then
             emoteLength_Num.Text = round(ProBaconDanceTrack.TimePosition).."/"..round(ProBaconDanceTrack.Length)
@@ -333,7 +334,7 @@ function emoteUI:CreateUI()
         local previewButton_Button = Instance.new("ImageButton")
         local UICorner_4 = Instance.new("UICorner")
 
-        emoteOption_Button.Name = "emoteOption_Button"
+        emoteOption_Button.Name = "emoteOption_Button ("..emoteName..")"
         emoteOption_Button.Parent = itemHolder
         emoteOption_Button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         emoteOption_Button.BackgroundTransparency = 0.750
