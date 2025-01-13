@@ -266,32 +266,34 @@ function emoteUI:CreateUI()
         end
         return false
     end
-    ImageButton.MouseButton1Down:Connect(function(input)
-        local input_begine_time = os.clock()
-        input.Changed:Connect(function(newInput)
-            if newInput.UserInputState == Enum.UserInputState.End then
-                if (os.clock() - input_begine_time) < 0.2 then
-                    if ProBaconDanceTrack then
-                        if ProBaconDanceTrack.Speed == 1 then
-                            ProBaconDanceTrack:AdjustSpeed(0)
+    ImageButton.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            local input_begine_time = os.clock()
+            input.Changed:Connect(function(newInput)
+                if newInput.UserInputState == Enum.UserInputState.End then
+                    if (os.clock() - input_begine_time) < 0.2 then
+                        if ProBaconDanceTrack then
+                            if ProBaconDanceTrack.Speed == 1 then
+                                ProBaconDanceTrack:AdjustSpeed(0)
+                            else
+                                ProBaconDanceTrack:AdjustSpeed(1)
+                            end
                         else
-                            ProBaconDanceTrack:AdjustSpeed(1)
+                            playEmote()
                         end
                     else
-                        playEmote()
-                    end
-                else
-                    if ProBaconDanceTrack then
-                        ProBaconDanceTrack:Destroy()
-                        ProBaconDanceTrack = nil
-                    end
-                    if ProBaconAnimation then
-                        ProBaconAnimation:Destroy()
-                        ProBaconAnimation = nil
+                        if ProBaconDanceTrack then
+                            ProBaconDanceTrack:Destroy()
+                            ProBaconDanceTrack = nil
+                        end
+                        if ProBaconAnimation then
+                            ProBaconAnimation:Destroy()
+                            ProBaconAnimation = nil
+                        end
                     end
                 end
-            end
-        end)
+            end)
+        end
     end)
     
 
