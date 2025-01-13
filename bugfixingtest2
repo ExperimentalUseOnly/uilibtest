@@ -268,10 +268,12 @@ function emoteUI:CreateUI()
     end
     ImageButton.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            print('input began')
             local input_begine_time = os.clock()
             input.Changed:Connect(function()
                 if input.UserInputState == Enum.UserInputState.End then
                     if (os.clock() - input_begine_time) < 0.2 then
+                        print('pause')
                         if ProBaconDanceTrack then
                             if ProBaconDanceTrack.Speed == 1 then
                                 ProBaconDanceTrack:AdjustSpeed(0)
@@ -282,6 +284,7 @@ function emoteUI:CreateUI()
                             playEmote()
                         end
                     else
+                        print('stop')
                         if ProBaconDanceTrack then
                             ProBaconDanceTrack:Destroy()
                             ProBaconDanceTrack = nil
