@@ -269,8 +269,8 @@ function emoteUI:CreateUI()
     ImageButton.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
             local input_begine_time = os.clock()
-            input.Changed:Connect(function(newInput)
-                if newInput.UserInputState == Enum.UserInputState.End then
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
                     if (os.clock() - input_begine_time) < 0.2 then
                         if ProBaconDanceTrack then
                             if ProBaconDanceTrack.Speed == 1 then
